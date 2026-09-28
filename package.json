@@ -1,0 +1,30 @@
+{
+  "name": "municipal-swm-platform",
+  "version": "1.0.0",
+  "description": "Municipal Solid Waste Collection & Operations Management Platform (MERN)",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix server run build && npm --prefix client run build",
+    "start": "npm --prefix server run start",
+    "seed": "tsx scripts/seed.ts",
+    "verify:data": "tsx scripts/verify-data.ts",
+    "demo:reset": "tsx scripts/reset-demo.ts",
+    "test": "vitest run",
+    "test:flows": "vitest run tests/flows",
+    "check": "npm --prefix server run typecheck && npm --prefix client run typecheck && npm run test",
+    "setup": "npm install && npm run seed && npm run verify:data"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
